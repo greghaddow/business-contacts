@@ -1,8 +1,17 @@
 <?php
-// web/app.php
 require_once __DIR__.'/../vendor/autoload.php';
+// web/app.php
+use Symfony\Component\HttpFoundation\Response;
+use BusinessContacts\Entity\Contact;
+use BusinessContacts\Entity\Organisation;
+
+// set the error handling
+ini_set('display_errors', 1);
+error_reporting(-1);
+
 
 $app = new Silex\Application();
+$app['debug'] = true;
 
 // ... definitions
 
@@ -19,10 +28,9 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
 $app->get('/', function () use ($app) {
 
-
-	return  "<h1>Business Contacts</h1>".
+	return  new Response("<h1>Business Contacts</h1>".
 	"<p>Contacts</p>".
-	"<p>Businesses</p>";
+	"<p>Businesses</p>");
 })->bind('homepage');
 
 
@@ -34,5 +42,4 @@ $app->get('/contacts/{id}', function ($id) use ($app) {
 	"<p>{$contact['email']}</p>";
 })->bind('contact');
 
-$app->run();
-
+return $app;

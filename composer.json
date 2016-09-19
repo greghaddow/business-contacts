@@ -3,5 +3,10 @@
         "silex/silex": "~2.0",
         "twig/twig": "^1.24",
         "doctrine/dbal": "~2.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "BusinessContacts": "src/"
+        }
     }
 }
