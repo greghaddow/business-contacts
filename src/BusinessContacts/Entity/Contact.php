@@ -2,7 +2,6 @@
 
 namespace BusinessContacts\Entity;
 
-//use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Contact

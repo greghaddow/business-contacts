@@ -4,6 +4,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Symfony\Component\HttpFoundation\Response;
 use BusinessContacts\Entity\Contact;
 use BusinessContacts\Entity\Organisation;
+use Dflydev\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 
 // set the error handling
 ini_set('display_errors', 1);
@@ -14,17 +15,29 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 // ... definitions
-
+$app->register(new DoctrineOrmServiceProvider());
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 	'db.options' => array(
 		'driver'   => 'pdo_mysql',
-		'host'      => 'localhost',
-		'dbname'    => 'business-address-book',
+		'host'      => 'mariadb',
+		'dbname'    => 'business-contacts',
 		'user'      => 'root',
-		'password'  => 'southpark',
+		'password'  => '',
 		'charset'   => 'utf8mb4',
 	),
 ));
+$app['orm.proxies_dir'] = __DIR__.'/../cache/doctrine/proxies';
+$app['orm.default_cache'] = 'array';
+$app['orm.em.options'] = array(
+	'mappings' => array(
+		array(
+			'type' => 'annotation',
+			'path' => __DIR__.'/../src',
+			'namespace' => 'BusinessContacts',
+		),
+	),
+);
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
 	'twig.path' => __DIR__.'/../src/BusinessContacts/views',
 ));
