@@ -25,9 +25,11 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 		'charset'   => 'utf8mb4',
 	),
 ));
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+	'twig.path' => __DIR__.'/../src/BusinessContacts/views',
+));
 
 $app->get('/', function () use ($app) {
-
 	return  new Response("<h1>Business Contacts</h1>".
 	"<p>Contacts</p>".
 	"<p>Businesses</p>");
@@ -37,9 +39,7 @@ $app->get('/', function () use ($app) {
 $app->get('/contacts/{id}', function ($id) use ($app) {
 	$sql = "SELECT * FROM contact WHERE id = ?";
 	$contact = $app['db']->fetchAssoc($sql, array((int) $id));
-
-	return  "<h1>{$contact['first_name']}</h1>".
-	"<p>{$contact['email']}</p>";
+	return $app['twig']->render('contact.html.twig', $contact);
 })->bind('contact');
 
 return $app;
