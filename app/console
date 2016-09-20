@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+$app = require_once __DIR__.'/../bootstrap.php';
+
+use BusinessContacts\Command\DatabaseInstallCommand;
+
+$console = $app["console"];
+$console->add(new DatabaseInstallCommand());
+$console->run();

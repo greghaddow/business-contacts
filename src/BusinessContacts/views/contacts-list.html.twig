@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div id="wrapper">
+    <div id="container" class="container-fluid">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Organisation
+                </th>
+                <th>
+                    Address
+                </th>
+
+                <th>
+                    Postcode
+                </th>
+                <th>
+                    Email
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td>
+                        {{ contact.first_name }}
+                    </td>
+
+                    <td>
+                        {{ contact.last_name }}
+                    </td>
+
+                    <td>
+                        {{ contact.organisation_id }}
+                    </td>
+
+                    <td>
+
+                    </td>
+
+                    <td>
+
+                    </td>
+
+                    <td>
+                        {{ contact.email }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endblock %}
