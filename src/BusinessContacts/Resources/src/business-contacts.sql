@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Table structure for table `contacts`
 --
 
-CREATE TABLE IF NOT EXISTS `contact` (
+CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `organisation_id` int(11) DEFAULT NULL,
   `salutation` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -42,19 +42,19 @@ CREATE TABLE IF NOT EXISTS `contact` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `contact`
+-- Dumping data for table `contacts`
 --
 
-INSERT INTO `contact` (`id`, `organisation_id`, `salutation`, `first_name`, `last_name`, `email`, `job_title`, `phone_number`, `extension`, `home_page`) VALUES
+INSERT INTO `contacts` (`id`, `organisation_id`, `salutation`, `first_name`, `last_name`, `email`, `job_title`, `phone_number`, `extension`, `home_page`) VALUES
 (1, 1, 'Ms', 'Test', 'Tester', 'test@example.com', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `organisation`
+-- Table structure for table `organisations`
 --
 
-CREATE TABLE IF NOT EXISTS `organisation` (
+CREATE TABLE IF NOT EXISTS `organisations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `primary_contact_id` int(11) DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -72,10 +72,10 @@ CREATE TABLE IF NOT EXISTS `organisation` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `organisation`
+-- Dumping data for table `organisations`
 --
 
-INSERT INTO `organisation` (`id`, `primary_contact_id`, `name`, `address1`, `address2`, `address3`, `city`, `postcode`, `county`, `country`, `phone_number`, `web_address`) VALUES
+INSERT INTO `organisations` (`id`, `primary_contact_id`, `name`, `address1`, `address2`, `address3`, `city`, `postcode`, `county`, `country`, `phone_number`, `web_address`) VALUES
 (1, 1, 'Test', 'Yada', NULL, NULL, 'Edinburgh', 'eh101010', NULL, 'UK', NULL, NULL);
 
 --
@@ -85,14 +85,14 @@ INSERT INTO `organisation` (`id`, `primary_contact_id`, `name`, `address1`, `add
 --
 -- Constraints for table `contact`
 --
-ALTER TABLE `contact`
-  ADD CONSTRAINT `FK_4C62E6389E6B1585` FOREIGN KEY (`organisation_id`) REFERENCES `organisation` (`id`) ON DELETE SET NULL;
+ALTER TABLE `contacts`
+  ADD CONSTRAINT `FK_4C62E6389E6B1585` FOREIGN KEY (`organisation_id`) REFERENCES `organisations` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `organisation`
 --
-ALTER TABLE `organisation`
-  ADD CONSTRAINT `FK_E6E132B4D905C92C` FOREIGN KEY (`primary_contact_id`) REFERENCES `contact` (`id`);
+ALTER TABLE `organisations`
+  ADD CONSTRAINT `FK_E6E132B4D905C92C` FOREIGN KEY (`primary_contact_id`) REFERENCES `contacts` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

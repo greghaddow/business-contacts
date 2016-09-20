@@ -6,7 +6,7 @@ namespace BusinessContacts\Entity;
 /**
  * Contact
  *
- * @ORM\Table(name="contact")
+ * @ORM\Table(name="contacts")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
  */
 class Contact
