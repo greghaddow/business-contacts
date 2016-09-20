@@ -15,9 +15,7 @@ $app['debug'] = true;
 
 
 $app->get('/', function () use ($app) {
-	return  new Response("<h1>Business Contacts</h1>".
-	"<p>Contacts</p>".
-	"<p>Businesses</p>");
+	return $app['twig']->render('index.html.twig');
 })->bind('homepage');
 
 
@@ -31,6 +29,13 @@ $app->get('/contacts', function () use ($app) {
 	$sql = "SELECT * FROM contact";
 	$contacts = $app['db']->fetchAll($sql);
 	return $app['twig']->render('contacts-list.html.twig', array('contacts' => $contacts));
-})->bind('contact');
+})->bind('contacts');
+
+
+$app->get('/organisations', function () use ($app) {
+	$sql = "SELECT * FROM organisation";
+	$organisations = $app['db']->fetchAll($sql);
+	return $app['twig']->render('organisations-list.html.twig', array('organisations' => $organisations));
+})->bind('organisations');
 
 return $app;

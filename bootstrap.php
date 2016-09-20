@@ -10,10 +10,10 @@ $app->register(new DoctrineOrmServiceProvider());
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 	'db.options' => array(
 		'driver'   => 'pdo_mysql',
-		'host'      => 'localhost',
+		'host'      => 'mariadb',
 		'dbname'    => 'business-contacts',
 		'user'      => 'root',
-		'password'  => 'southpark',
+		'password'  => '',
 		'charset'   => 'utf8mb4',
 	),
 ));

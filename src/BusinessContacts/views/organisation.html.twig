@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container" class="container-fluid">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th colspan="2">
+                        Contact
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>Name: </td>
+                        <td>
+                            {{ first_name }} {{ last_name }}
+                        </td>
+                        </tr>
+
+                    </tr>
+                    <tr>
+                        <td>Organisation: </td>
+                        <td>
+                            {{ organisation_id }}
+                        </td>
+                    </tr>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+    </div>
+    </div>
+{% endblock %}
