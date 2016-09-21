@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
 <div id="wrapper">
     <div id="container" class="container-fluid">
         <table class="table table-striped">
@@ -31,15 +32,15 @@
             {% for contact in contacts %}
                 <tr>
                     <td>
-                        {{ contact.first_name }}
+                        {{ contact.firstName }}
                     </td>
 
                     <td>
-                        {{ contact.last_name }}
+                        {{ contact.lastName }}
                     </td>
 
                     <td>
-                        {{ contact.organisation_id }}
+                        <a href="{{ path('organisation', {'id': contact.organisation.id}) }}">{{ contact.organisation }}</a>
                     </td>
 
                     <td>

@@ -2,12 +2,16 @@
 
 namespace BusinessContacts\Entity;
 
+use BusinessContacts\Entity\Organisation;
+
+use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Contact
  *
+ * @ORM\Entity()
  * @ORM\Table(name="contacts")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
  */
 class Contact
 {

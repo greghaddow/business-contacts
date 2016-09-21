@@ -2,7 +2,7 @@
 $app = require_once dirname(__DIR__) ."/bootstrap.php";
 // web/app.php
 use Symfony\Component\HttpFoundation\Response;
-use BusinessContacts\Entity\Contact;
+use BusinessContacts\Entity\Contact as Contact;
 use BusinessContacts\Entity\Organisation;
 
 // set the error handling
@@ -20,18 +20,17 @@ $app->get('/', function () use ($app) {
 
 
 $app->get('/contact/{id}', function ($id) use ($app) {
-	$sql = "SELECT c.first_name, c.last_name, o.name AS organisation_name
-FROM contacts c 
-LEFT JOIN organisations o ON (o.id=c.organisation_id) 
-WHERE c.id = ?";
-	$contact = $app['db']->fetchAssoc($sql, array((int) $id));
-	
-	return $app['twig']->render('contact.html.twig', $contact);
+	$em = $app['orm.em'];
+
+	$contact = $em->find('BusinessContacts\Entity\Contact',$id);
+
+	return $app['twig']->render('contact.html.twig', array('contact' => $contact));
 })->bind('contact');
 
 $app->get('/contacts', function () use ($app) {
 	$sql = "SELECT * FROM contacts";
-	$contacts = $app['db']->fetchAll($sql);
+	$em = $app['orm.em'];
+	$contacts = $em->getRepository('BusinessContacts\Entity\Contact')->findAll();
 	return $app['twig']->render('contacts-list.html.twig', array('contacts' => $contacts));
 })->bind('contacts');
 

@@ -2,9 +2,15 @@
 require_once __DIR__.'/vendor/autoload.php';
 use Dflydev\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
+use Silex\Provider\FormServiceProvider;
 
 $app = new Silex\Application();
 
+$app->register(new FormServiceProvider());
+$app->register(new Silex\Provider\LocaleServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+	'locale_fallbacks' => array('en'),
+));
 //// ... definitions
 $app->register(new DoctrineOrmServiceProvider());
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
@@ -23,8 +29,9 @@ $app['orm.em.options'] = array(
 	'mappings' => array(
 		array(
 			'type' => 'annotation',
-			'path' => __DIR__.'/src',
-			'namespace' => 'BusinessContacts',
+			'path' => __DIR__.'/src/BusinessContacts/Entity',
+			'namespace' => 'BusinessContacts\Entity',
+			'use_simple_annotation_reader' => false
 		),
 	),
 );
