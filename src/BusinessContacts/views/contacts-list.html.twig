@@ -8,6 +8,9 @@
             <thead>
             <tr>
                 <th>
+                    Salutation
+                </th>
+                <th>
                     First Name
                 </th>
                 <th>
@@ -17,20 +20,31 @@
                     Organisation
                 </th>
                 <th>
-                    Address
+                    Job Title
                 </th>
 
                 <th>
-                    Postcode
+                    Phone Number
+                </th>
+                <th>
+                    Extension
                 </th>
                 <th>
                     Email
+                </th>
+
+                <th>
                 </th>
             </tr>
             </thead>
             <tbody>
             {% for contact in contacts %}
                 <tr>
+
+                    <td>
+                        {{ contact.salutation }}
+                    </td>
+
                     <td>
                         {{ contact.firstName }}
                     </td>
@@ -44,15 +58,22 @@
                     </td>
 
                     <td>
-
+                        {{ contact.jobTitle }}
                     </td>
 
                     <td>
+                        {{ contact.phoneNumber }}
+                    </td>
 
+                    <td>
+                        {{ contact.extension }}
                     </td>
 
                     <td>
                         {{ contact.email }}
+                    </td>
+                    <td>
+                        <a href="{{ path('contact-edit', {'id': contact.id}) }}" class="btn btn-default">Edit</a>
                     </td>
                 </tr>
             {% endfor %}

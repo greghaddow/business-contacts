@@ -27,6 +27,14 @@ $app->get('/contact/{id}', function ($id) use ($app) {
 	return $app['twig']->render('contact.html.twig', array('contact' => $contact));
 })->bind('contact');
 
+$app->get('/contact/{id}/edit', function ($id) use ($app) {
+	$em = $app['orm.em'];
+
+	$contact = $em->find('BusinessContacts\Entity\Contact',$id);
+
+	return $app['twig']->render('contact.html.twig', array('contact' => $contact));
+})->bind('contact-edit');
+
 $app->get('/contacts', function () use ($app) {
 	$sql = "SELECT * FROM contacts";
 	$em = $app['orm.em'];
